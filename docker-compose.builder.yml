@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  # Сборка для Linux
+  build-linux:
+    build:
+      context: .
+      dockerfile: Dockerfile.builder
+    volumes:
+      - ./release:/app/release
+    command: npm run dist:linux
+
+  # Сборка для macOS (требует macOS хост, но можно попробовать)
+  build-mac:
+    build:
+      context: .
+      dockerfile: Dockerfile.builder
+    volumes:
+      - ./release:/app/release
+    command: npm run dist:mac
+    environment:
+      - CSC_IDENTITY_AUTO_DISCOVERY=false

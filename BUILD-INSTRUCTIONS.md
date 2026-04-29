@@ -1,86 +1,59 @@
-# Инструкции по сборке SferaLLM
+# Инструкция по сборке SferaLLM на разных платформах
 
-## Текущий статус
-
-Все улучшения реализованы. Ошибки из `error.txt` устарели - файлы `autoUpdater.ts` и `sessionManager.ts` больше не существуют в проекте.
-
-## Исправленные проблемы
-
-1. ✅ **App.tsx** - Заменен `window.require('electron')` на `window.electronAPI`
-2. ✅ **main.ts** - Использует только существующие модули
-3. ✅ **preload.ts** - Создан безопасный IPC bridge
-
-## Сборка проекта
-
-### Требования
-- Node.js 18+ 
-- npm 9+
-
-### Команды
+## 🖥️ Windows (локально) ✅
 
 ```bash
-# Перейти в директорию проекта
-cd "D:\ii\omniroute\SferaLLM-Production\SferaLLM"
-
-# Установить зависимости
-npm install
-
-# Компиляция TypeScript
-npx tsc
-
-# Сборка webpack
-npx webpack --mode production
-
-# Копирование preload.js (если нужно)
-copy src\main\preload.js dist\main\preload.js
-
-# Или все вместе
-npm run build
-
-# Запуск
-npm start
-
-# Создание установщика
-npm run dist
+npm run dist:win
 ```
 
-## Возможные проблемы
+**Результат:**
+- `release/SferaLLM Setup 2.1.0.exe` - установщик (~78 MB)
+- `release/SferaLLM 2.1.0.exe` - portable версия (~78 MB)
 
-### 1. Ошибка "npm: command not found"
-**Решение:** Установите Node.js с https://nodejs.org/
+---
 
-### 2. Ошибки TypeScript компиляции
-**Решение:** Убедитесь, что все файлы из INTEGRATION-GUIDE.md интегрированы
+## 🐧 Linux (на удалённом сервере через Docker)
 
-### 3. Ошибка "Cannot find module 'electron'"
-**Решение:** 
+### Автоматический скрипт:
+
 ```bash
-npm install electron --save-dev
+bash build-on-server.sh
 ```
 
-### 4. Ошибки webpack
-**Решение:**
+### Вручную:
+
+1. Скопируйте файлы на сервер:
 ```bash
-npm install webpack webpack-cli --save-dev
+scp -r D:/ii/omniroute/SferaLLM-Production/SferaLLM/* dima@192.168.0.136:~/sferallm-build/
 ```
 
-## Проверка после сборки
+2. На сервере соберите в Docker:
+```bash
+ssh dima@192.168.0.136
+cd ~/sferallm-build
+docker build -f Dockerfile.builder -t sferallm-builder .
+docker run --rm -v $(pwd)/release:/app/release sferallm-builder
+```
 
-1. Проверьте, что `dist/main/main.js` создан
-2. Проверьте, что `dist/main/preload.js` создан
-3. Проверьте, что `dist/renderer/` содержит HTML и JS файлы
+3. Скачайте готовые файлы:
+```bash
+scp -r dima@192.168.0.136:~/sferallm-build/release/* D:/ii/omniroute/SferaLLM-Production/SferaLLM/release/
+```
 
-## Следующие шаги
+**Результат:**
+- `SferaLLM-2.1.0.AppImage` - универсальный Linux файл
+- `sferallm_2.1.0_amd64.deb` - пакет для Debian/Ubuntu
 
-1. Установите Node.js, если еще не установлен
-2. Запустите `npm install`
-3. Запустите `npm run build`
-4. Проверьте вывод на наличие ошибок
-5. Если есть ошибки - сообщите мне
+---
 
-## Примечание
+## 🍎 macOS (через GitHub Actions)
 
-Файл `error.txt` содержит устаревшие ошибки. После моих изменений:
-- Удалены ссылки на несуществующие файлы
-- Исправлен App.tsx для использования безопасного API
-- Все новые утилиты готовы к использованию
+macOS сборка требует macOS систему. Лучшее решение - GitHub Actions (бесплатно).
+
+Создайте `.github/workflows/release.yml` и запушьте тег:
+```bash
+git tag v2.1.0
+git push origin v2.1.0
+```
+
+GitHub автоматически соберёт все платформы!
