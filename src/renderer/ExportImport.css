@@ -1,0 +1,83 @@
+.export-import-modal {
+  background: var(--bg-secondary);
+  border-radius: 12px;
+  width: 90%;
+  max-width: 600px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.export-import-content {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.section h3 {
+  margin: 0;
+  font-size: 18px;
+  color: var(--text-primary);
+}
+
+.section p {
+  margin: 0;
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.button-group {
+  display: flex;
+  gap: 10px;
+}
+
+.button-group button,
+.section > button {
+  flex: 1;
+  padding: 12px 20px;
+  border: 1px solid var(--border-color);
+  background: var(--accent-color);
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s;
+}
+
+.button-group button:hover,
+.section > button:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.button-group button:disabled,
+.section > button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.info-box {
+  padding: 12px;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.info-box strong {
+  color: var(--text-primary);
+}
+
+.divider {
+  height: 1px;
+  background: var(--border-color);
+  margin: 10px 0;
+}

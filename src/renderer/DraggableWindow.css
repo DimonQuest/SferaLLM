@@ -1,0 +1,153 @@
+.draggable-window {
+  position: absolute;
+  background: #1e1e1e;
+  border: 1px solid #3d3d3d;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+}
+
+.draggable-window.active {
+  border-color: #007acc;
+  box-shadow: 0 4px 16px rgba(0, 122, 204, 0.4);
+  z-index: 100;
+}
+
+.draggable-header {
+  background: #2d2d2d;
+  padding: 12px 16px;
+  cursor: move;
+  user-select: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #3d3d3d;
+}
+
+.draggable-header span {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.draggable-header .model-badge {
+  background: #007acc;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+.draggable-content {
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.draggable-content .chat-window {
+  border: none;
+  background: transparent;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.draggable-content .chat-window.disabled {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.draggable-content .chat-header {
+  display: none;
+}
+
+.draggable-content .messages {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+.draggable-content .input-area {
+  flex-shrink: 0;
+}
+
+.resize-handle {
+  position: absolute;
+  background: transparent;
+  z-index: 10;
+}
+
+/* Углы */
+.resize-handle.nw {
+  top: 0;
+  left: 0;
+  width: 10px;
+  height: 10px;
+  cursor: nw-resize;
+}
+
+.resize-handle.ne {
+  top: 0;
+  right: 0;
+  width: 10px;
+  height: 10px;
+  cursor: ne-resize;
+}
+
+.resize-handle.sw {
+  bottom: 0;
+  left: 0;
+  width: 10px;
+  height: 10px;
+  cursor: sw-resize;
+}
+
+.resize-handle.se {
+  bottom: 0;
+  right: 0;
+  width: 20px;
+  height: 20px;
+  cursor: nwse-resize;
+  background: linear-gradient(135deg, transparent 50%, #3d3d3d 50%);
+}
+
+.resize-handle.se:hover {
+  background: linear-gradient(135deg, transparent 50%, #007acc 50%);
+}
+
+/* Стороны */
+.resize-handle.n {
+  top: 0;
+  left: 10px;
+  right: 10px;
+  height: 5px;
+  cursor: n-resize;
+}
+
+.resize-handle.s {
+  bottom: 0;
+  left: 10px;
+  right: 10px;
+  height: 5px;
+  cursor: s-resize;
+}
+
+.resize-handle.w {
+  left: 0;
+  top: 10px;
+  bottom: 10px;
+  width: 5px;
+  cursor: w-resize;
+}
+
+.resize-handle.e {
+  right: 0;
+  top: 10px;
+  bottom: 10px;
+  width: 5px;
+  cursor: e-resize;
+}
