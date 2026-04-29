@@ -143,7 +143,7 @@ sudo dpkg -i sferallm_2.1.0_amd64.deb
 3. Запустите Local Server
 4. В SferaLLM:
    - Провайдер: **Custom**
-   - Base URL: `http://localhost:1234/v1`
+   - Base URL: `http://localhost:1234`
    - Модель: имя загруженной модели
 
 ### Мультиагентная коллаборация
